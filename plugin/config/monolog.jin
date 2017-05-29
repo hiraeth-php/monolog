@@ -1,6 +1,6 @@
 [application]
 delegates = [
-	"Hiraeth\\Monolog\\Delegate"
+	"Hiraeth\\Monolog\\LoggerDelegate"
 ]
 
 [handlers]
