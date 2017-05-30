@@ -2,7 +2,6 @@
 
 namespace Hiraeth\Monolog;
 
-use Auryn;
 use Hiraeth;
 use Monolog;
 
@@ -76,10 +75,10 @@ class LoggerDelegate implements Hiraeth\Delegate
 	 * Get the instance of the class for which the delegate operates.
 	 *
 	 * @access public
-	 * @param Auryn\Injector $broker The dependency injector instance
+	 * @param Hiraeth\Broker $broker The dependency injector instance
 	 * @return Monolog\Logger The instance of our logger
 	 */
-	public function __invoke(Auryn\Injector $broker)
+	public function __invoke(Hiraeth\Broker $broker)
 	{
 		$logger   = new Monolog\Logger('app');
 		$handlers = $this->config->get('monolog', 'handlers', array());
