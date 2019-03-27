@@ -1,0 +1,31 @@
+[logger]
+
+	;
+	;
+	;
+
+	disabled = true
+
+	;
+	;
+	;
+
+	level = env(LOGGING, Psr\Log\LogLevel::WARNING)
+
+	;
+	;
+	;
+
+	class = Monolog\Handler\RotatingFileHandler
+
+	;
+	;
+	;
+
+	filename  = run($app->getFile('storage/logs/app.log')->getPathname())
+
+	;
+	;
+	;
+
+	maxFiles  = 5

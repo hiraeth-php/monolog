@@ -1,26 +1,27 @@
 {
-    "name": "hiraeth/monolog",
+	"name": "hiraeth/monolog",
     "description": "Monolog for the Hiraeth Nano-Framework",
-    "license": "MIT",
-    "authors": [
-        {
-            "name":  "Matthew J. Sahagian",
-            "email": "msahagian@dotink.org",
-            "role":  "Lead Architect / Developer"
-        }
-    ],
-    "require": {
-        "monolog/monolog": "^1.22"
-    },
-    "autoload": {
-        "classmap": ["src/"]
-    },
-    "type": "opus-package",
-    "extra": {
-        "opus": {
-            "hiraeth/app": {
-                "plugin/config": ""
-            }
-        }
-    }
+	"license": "MIT",
+	"authors": [
+		{
+			"name":  "Matthew J. Sahagian",
+			"email": "matthew.sahagian@gmail.com",
+			"role":  "Lead Architect / Developer"
+		}
+	],
+	"require": {
+		"hiraeth/app": "^2.0",
+		"monolog/monolog": "^1.24"
+	},
+	"autoload": {
+		"classmap": ["src/"]
+	},
+	"type": "opus-package",
+	"extra": {
+		"opus": {
+			"hiraeth/app": {
+				"config": ""
+			}
+		}
+	}
 }
