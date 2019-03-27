@@ -49,7 +49,7 @@ class RotatingFileHandlerDelegate implements Hiraeth\Delegate
 		]);
 
 		return new RotatingFileHandler(
-			$options['filename']
+			$options['filename'],
 			$options['maxFiles'],
 			constant($options['level'])
 		);
