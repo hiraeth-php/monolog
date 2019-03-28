@@ -42,14 +42,16 @@ class RotatingFileHandlerDelegate implements Hiraeth\Delegate
 	 */
 	public function __invoke(Hiraeth\Broker $broker): object
 	{
-		$options = $this->app->getConfig('loggers/rotating_file', 'logger', [
+		$loggers    = $this->app->getConfig('*', 'logger.class', NULL);
+		$collection = array_search(RotatingFileHandler::class, $loggers);
+		$options    = $this->app->getConfig($collection, 'logger', [
 			'level'    => 'Psr\Log\LogLevel::WARNING',
-			'filename' => $this->app->getFile('storage/logs/app.log')->getPathname(),
+			'filename' => 'storage/logs/app.log',
 			'maxFiles' => 5
 		]);
 
 		return new RotatingFileHandler(
-			$options['filename'],
+			$this->app->getFile($options['filename'])->getPathname(),
 			$options['maxFiles'],
 			constant($options['level'])
 		);
