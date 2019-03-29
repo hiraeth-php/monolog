@@ -18,7 +18,7 @@
 	;
 
 	delegates = [
-		"Hiraeth\Monolog\Delegate",
+		"Hiraeth\Monolog\MonologDelegate",
 		"Hiraeth\Monolog\RotatingFileHandlerDelegate"
 	]
 

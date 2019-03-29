@@ -8,7 +8,7 @@ use Monolog\Logger;
 /**
  *
  */
-class Delegate implements Hiraeth\Delegate
+class MonologDelegate implements Hiraeth\Delegate
 {
 	/**
 	 * Get the class for which the delegate operates.
