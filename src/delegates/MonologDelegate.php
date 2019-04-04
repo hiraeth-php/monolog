@@ -24,31 +24,22 @@ class MonologDelegate implements Hiraeth\Delegate
 
 
 	/**
-	 *
-	 */
-	public function __construct(Hiraeth\Application $app)
-	{
-		$this->app = $app;
-	}
-
-
-	/**
 	 * Get the instance of the class for which the delegate operates.
 	 *
 	 * @access public
-	 * @param Hiraeth\Broker $broker The dependency injector instance
+	 * @param Hiraeth\Application $app The application instance for which the delegate operates
 	 * @return object The instance of the class for which the delegate operates
 	 */
-	public function __invoke(Hiraeth\Broker $broker): object
+	public function __invoke(Hiraeth\Application $app): object
 	{
-		$logger = new Logger($this->app->getId());
+		$logger = new Logger($app->getId());
 
-		foreach ($this->app->getConfig('*', 'logger', []) as $config) {
+		foreach ($app->getConfig('*', 'logger', []) as $config) {
 			if (!$config || $config['disabled'] ?? TRUE) {
 				continue;
 			}
 
-			$logger->pushHandler($broker->make($config['class']));
+			$logger->pushHandler($app->get($config['class']));
 		}
 
 		return $logger;

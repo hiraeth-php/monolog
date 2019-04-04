@@ -25,33 +25,24 @@ class RotatingFileHandlerDelegate implements Hiraeth\Delegate
 
 
 	/**
-	 *
-	 */
-	public function __construct(Hiraeth\Application $app)
-	{
-		$this->app = $app;
-	}
-
-
-	/**
 	 * Get the instance of the class for which the delegate operates.
 	 *
 	 * @access public
-	 * @param Hiraeth\Broker $broker The dependency injector instance
+	 * @param Hiraeth\Application $app The application instance for which the delegate operates
 	 * @return object The instance of the class for which the delegate operates
 	 */
-	public function __invoke(Hiraeth\Broker $broker): object
+	public function __invoke(Hiraeth\Application $app): object
 	{
-		$loggers    = $this->app->getConfig('*', 'logger.class', NULL);
+		$loggers    = $app->getConfig('*', 'logger.class', NULL);
 		$collection = array_search(RotatingFileHandler::class, $loggers);
-		$options    = $this->app->getConfig($collection, 'logger', [
+		$options    = $app->getConfig($collection, 'logger', [
 			'level'    => 'Psr\Log\LogLevel::WARNING',
 			'filename' => 'storage/logs/app.log',
 			'maxFiles' => 5
 		]);
 
 		return new RotatingFileHandler(
-			$this->app->getFile($options['filename'])->getPathname(),
+			$app->getFile($options['filename'])->getPathname(),
 			$options['maxFiles'],
 			constant($options['level'])
 		);
