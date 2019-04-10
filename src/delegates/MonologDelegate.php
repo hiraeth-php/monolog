@@ -42,6 +42,6 @@ class MonologDelegate implements Hiraeth\Delegate
 			$logger->pushHandler($app->get($config['class']));
 		}
 
-		return $logger;
+		return $app->share($logger);
 	}
 }
