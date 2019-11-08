@@ -31,5 +31,6 @@
 	;
 
 	providers = [
+		"Hiraeth\Monolog\BootProvider",
 		"Hiraeth\Monolog\MonologProvider"
 	]
