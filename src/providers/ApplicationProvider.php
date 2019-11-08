@@ -8,7 +8,7 @@ use Monolog\Logger;
 /**
  *
  */
-class BootProvider implements Hiraeth\Provider
+class ApplicationProvider implements Hiraeth\Provider
 {
 	/**
 	 * Get the interfaces for which the provider operates.
@@ -19,7 +19,7 @@ class BootProvider implements Hiraeth\Provider
 	static public function getInterfaces(): array
 	{
 		return [
-			Hiraeth\Application::BOOT
+			Hiraeth\Application::class
 		];
 	}
 
