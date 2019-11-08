@@ -34,7 +34,7 @@ class BootProvider implements Hiraeth\Provider
 	 */
 	public function __invoke($instance, Hiraeth\Application $app): object
 	{
-		if ($this->getEnvironment('LOGGING', TRUE)) {
+		if ($app->getEnvironment('LOGGING', TRUE)) {
 			$app->setLogger(Logger::class);
 		}
 
