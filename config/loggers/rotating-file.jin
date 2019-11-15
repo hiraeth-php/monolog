@@ -25,7 +25,7 @@
 		;
 		;
 
-		filename = storage/logs/app.log
+		filename = file(storage/logs/app.log)
 
 		;
 		;
