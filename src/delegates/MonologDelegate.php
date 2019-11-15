@@ -32,14 +32,25 @@ class MonologDelegate implements Hiraeth\Delegate
 	 */
 	public function __invoke(Hiraeth\Application $app): object
 	{
-		$logger = new Logger($app->getId());
+		$logger   = new Logger($app->getId());
+		$defaults = [
+			'class'    => NULL,
+			'disabled' => FALSE,
+			'level'    => 'Psr\Log\LogLevel::WARNING'
+		];
 
-		foreach ($app->getConfig('*', 'logger', []) as $config) {
-			if (!$config || $config['disabled'] ?? TRUE) {
+		foreach ($app->getConfig('*', 'logger', $defaults) as $path => $config) {
+			$options = [];
+			
+			if ($config['disabled'] || !$config['class']) {
 				continue;
 			}
 
-			$logger->pushHandler($app->get($config['class']));
+			foreach ($app->getConfig($path, 'logger.options', []) as $key => $value) {
+				$options[':' . $key] = $value;
+			}
+
+			$logger->pushHandler($app->get($config['class'], $options));
 		}
 
 		return $app->share($logger);

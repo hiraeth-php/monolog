@@ -10,22 +10,31 @@
 	;
 	;
 
-	level = env(LOGGING, Psr\Log\LogLevel::WARNING)
-
-	;
-	;
-	;
-
 	class = Monolog\Handler\RotatingFileHandler
 
 	;
-	;
-	;
-
-	filename = storage/logs/app.log
-
-	;
-	;
+	; Below is a list of options that will be translated to parameters for the above class's
+	; constructor -- `__construct()` -- .  Note the names need to match the parameter names.  If a
+	; parameter requires an object dependency you will need to make sure there's a delegate, alias,
+	; etc, for it to be resolved by the dependency injector.
 	;
 
-	maxFiles  = 5
+	[&.options]
+
+		;
+		;
+		;
+
+		filename = storage/logs/app.log
+
+		;
+		;
+		;
+
+		level = env(LOGGING, warning)
+
+		;
+		;
+		;
+
+		maxFiles  = 5
