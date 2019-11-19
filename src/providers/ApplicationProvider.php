@@ -26,7 +26,7 @@ class ApplicationProvider implements Hiraeth\Provider
 	 */
 	public function __invoke($instance, Hiraeth\Application $app): object
 	{
-		if ($app->getEnvironment('LOGGING', TRUE)) {
+		if ($app->getEnvironment('LOGGING', 'warning')) {
 			$app->setLogger(Logger::class);
 		}
 
