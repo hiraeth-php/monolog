@@ -6,16 +6,27 @@ use Hiraeth;
 use Monolog\Logger;
 
 /**
- *
+ * {@inheritDoc}
  */
 class MonologDelegate implements Hiraeth\Delegate
 {
 	/**
-	 * Get the class for which the delegate operates.
+	 * Default configuration for a logger
 	 *
-	 * @static
-	 * @access public
-	 * @return string The class for which the delegate operates
+	 * @var array
+	 */
+	static $defaultConfig = [
+		'class'    => NULL,
+		'disabled' => FALSE,
+		'priority' => 50,
+		'options'  => [
+			'level' => 'warning'
+		]
+	];
+
+
+	/**
+	 *  {@inheritDoc}
 	 */
 	static public function getClass(): string
 	{
@@ -24,29 +35,23 @@ class MonologDelegate implements Hiraeth\Delegate
 
 
 	/**
-	 * Get the instance of the class for which the delegate operates.
-	 *
-	 * @access public
-	 * @param Hiraeth\Application $app The application instance for which the delegate operates
-	 * @return object The instance of the class for which the delegate operates
+	 * {@inheritDoc}
 	 */
 	public function __invoke(Hiraeth\Application $app): object
 	{
-		$logger   = new Logger($app->getId());
-		$defaults = [
-			'class'    => NULL,
-			'disabled' => FALSE,
-			'level'    => 'Psr\Log\LogLevel::WARNING'
-		];
+		$logger  = new Logger($app->getId());
+		$configs = $app->getConfig('*', 'logger', static::$defaultConfig);
 
-		foreach ($app->getConfig('*', 'logger', $defaults) as $path => $config) {
-			$options = [];
-			
-			if ($config['disabled'] || !$config['class']) {
+		usort($configs, function($a, $b) {
+			return $a['priority'] - $b['priority'];
+		});
+
+		foreach ($configs as $path => $config) {
+			if (!$config['class'] || $config['disabled']) {
 				continue;
 			}
 
-			foreach ($app->getConfig($path, 'logger.options', []) as $key => $value) {
+			foreach ($config['options'] as $key => $value) {
 				$options[':' . $key] = $value;
 			}
 

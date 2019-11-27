@@ -7,7 +7,7 @@ use Monolog\Logger;
 use Psr\Log\LoggerAwareInterface;
 
 /**
- *
+ * {@inheritDoc}
  */
 class MonologProvider implements Hiraeth\Provider
 {

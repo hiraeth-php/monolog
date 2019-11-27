@@ -1,13 +1,21 @@
 [logger]
 
 	;
-	;
+	; Whether or not the logger is disabled
 	;
 
 	disabled = false
 
+
 	;
+	; The priority for the logger
 	;
+
+	priority = 1
+
+
+	;
+	; The logger class
 	;
 
 	class = Monolog\Handler\RotatingFileHandler

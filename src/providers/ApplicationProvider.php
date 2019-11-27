@@ -6,7 +6,7 @@ use Hiraeth;
 use Monolog\Logger;
 
 /**
- *
+ * {@inheritDoc}
  */
 class ApplicationProvider implements Hiraeth\Provider
 {
