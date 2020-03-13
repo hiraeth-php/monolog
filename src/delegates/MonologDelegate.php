@@ -4,6 +4,7 @@ namespace Hiraeth\Monolog;
 
 use Hiraeth;
 use Monolog\Logger;
+use Monolog\Handler\NullHandler;
 
 /**
  * {@inheritDoc}
@@ -59,6 +60,9 @@ class MonologDelegate implements Hiraeth\Delegate
 
 				$logger->pushHandler($app->get($config['class'], $options));
 			}
+
+		} else {
+			$logger->pushHandler($app->get(NullHandler::class));
 		}
 
 		return $app->share($logger);
