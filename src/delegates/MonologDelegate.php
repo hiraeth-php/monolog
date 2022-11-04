@@ -14,7 +14,7 @@ class MonologDelegate implements Hiraeth\Delegate
 	/**
 	 * Default configuration for a logger
 	 *
-	 * @var array
+	 * @var array<string, mixed>
 	 */
 	static $defaultConfig = [
 		'class'    => NULL,
@@ -40,7 +40,8 @@ class MonologDelegate implements Hiraeth\Delegate
 	 */
 	public function __invoke(Hiraeth\Application $app): object
 	{
-		$logger = new Logger($app->getId());
+		$options = array();
+		$logger  = new Logger($app->getId());
 
 		if ($app->getEnvironment('LOGGING', 'warning')) {
 			$configs = $app->getConfig('*', 'logger', static::$defaultConfig);

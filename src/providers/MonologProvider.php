@@ -24,6 +24,8 @@ class MonologProvider implements Hiraeth\Provider
 
 	/**
 	 * {@inheritDoc}
+	 *
+	 * @param LoggerAwareInterface $instance
 	 */
 	public function __invoke($instance, Hiraeth\Application $app): object
 	{
