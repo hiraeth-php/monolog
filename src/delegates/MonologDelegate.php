@@ -55,11 +55,7 @@ class MonologDelegate implements Hiraeth\Delegate
 					continue;
 				}
 
-				foreach ($config['options'] as $key => $value) {
-					$options[':' . $key] = $value;
-				}
-
-				$logger->pushHandler($app->get($config['class'], $options));
+				$logger->pushHandler($app->get($config['class'], $config['options']));
 			}
 
 		} else {
