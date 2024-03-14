@@ -10,6 +10,7 @@
         }
     ],
     "require": {
+        "hiraeth/app": "^1.0",
         "monolog/monolog": "^1.22"
     },
     "autoload": {
